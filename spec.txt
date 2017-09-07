@@ -1,0 +1,10 @@
+Keep track of show name venue band name and bandmemebers(paymenent cash check)
+Manager- Name of show
+	 Date/Time
+	 Pay-cash or check
+	 Name of bandmembers and instruments they play
+	 Setlist of songs for that night
+	 Poss Feature - Caldar click to link to band shows with all the indo
+
+Play together - online studio
+
