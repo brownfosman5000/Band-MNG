@@ -5,6 +5,13 @@ Manager- Name of show
 	 Name of bandmembers and instruments they play
 	 Setlist of songs for that night
 	 Poss Feature - Caldar click to link to band shows with all the indo
-
+	 
+	 form for filling out band info -- = bar for typing
+		Name of show ---------------------
+		Date ---------------------
+		Time -------------------
+		Band Member ------ Instrument ----- ....Add a member triggers another bar
+		Setlist Name of Song ----------- Add a song triggers another bar
+		
 Play together - online studio
 

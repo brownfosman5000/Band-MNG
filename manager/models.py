@@ -22,9 +22,10 @@ class Setlist(models.Model):
 class BandMembers(models.Model):
 	show = models.ForeignKey(ShowTracker)
 	member = models.CharField(max_length=50,null=True)	
-
-#class CashOrCheck(models.Model):
-#	bandmember = models.ForeignKey(BandMembers)
+	
+	
+class CashOrCheck(models.Model):
+	bandmember = models.ForeignKey(BandMembers)
 	
 
 
