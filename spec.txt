@@ -6,6 +6,16 @@ Manager- Name of show
 	 Setlist of songs for that night
 	 Poss Feature - Caldar click to link to band shows with all the indo
 	 
+	 ShowTracker-Datetime,venue
+		For each show we have these:
+			Setlist-name of setlist
+				For each setlist we have songs	
+			BandMembers-Name of personell
+				For each band we have memebers
+
+		
+
+	
 	 form for filling out band info -- = bar for typing
 		Name of show ---------------------
 		Date ---------------------

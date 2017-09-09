@@ -12,20 +12,41 @@ class ShowTracker(models.Model):
         def __unicode__(self):
                 return self.venue or u''
 
+#For each show I want a setlist
 class Setlist(models.Model):
         show = models.ForeignKey(ShowTracker)
-        song = models.CharField(max_length=50,null=True)
+	nameofsetlist = models.CharField(max_length=50,null=True)
 
         def __unicode__(self):
-                return self.song or u''
+                return self.nameofsetlist or u''
 
-class BandMembers(models.Model):
+#For each setlist I want a song 
+class Song(models.Model):
+	setlist = models.ForeignKey(Setlist)
+        song = models.CharField(max_length=50,null=True)
+	
+	def __unicode__(self):
+		return self.song
+		
+
+#For each show I want a group of bandmemebers
+class Band(models.Model):
 	show = models.ForeignKey(ShowTracker)
-	member = models.CharField(max_length=50,null=True)	
+	nameofband = models.CharField(max_length=50,null=True)	
 	
+	def __unicode__(self):	
+		return self.nameofband
 	
-class CashOrCheck(models.Model):
-	bandmember = models.ForeignKey(BandMembers)
+class BandMembers(models.Model):
+	band = models.ForeignKey(Band)
+	nameofbandmember = models.CharField(max_length=50,null=True)
+	instrument = models.CharField(max_length=50,null=True)	
+	
+	def __unicode__(self):
+		return self.nameofbandmember
+	
+#class CashOrCheck(models.Model):
+	#bandmember = models.ForeignKey(BandMembers)
 	
 
 
