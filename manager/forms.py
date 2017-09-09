@@ -1,12 +1,11 @@
 from django import forms
-from django.forms import DateTimeField,CharField
+from models import ShowTracker
 
 
 #Form for ShowTracker
-class ShowTrackerForm(forms.Form):
-	datetime = forms.DateTimeField()
-	venue = forms.CharField(max_length=50)
-	
-	
+class ShowTrackerForm(forms.ModelForm):
+	class Meta:
+		model = ShowTracker	
+		fields ="__all__"	
 		
 
