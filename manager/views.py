@@ -15,7 +15,11 @@ def addBand(request):
 		
 		if showform.is_valid():
 			showform.save()
-	        	return HttpResponseRedirect("infostored")		
+	        	return HttpResponseRedirect("/success")		
 	else:
 		showform = forms.ShowTrackerForm()		
 		return render(request,"manager/addband.html" ,{"form" : showform})
+
+
+def success(request):
+	return render(request,"manager/success.html")
