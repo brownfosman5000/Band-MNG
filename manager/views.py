@@ -11,14 +11,21 @@ def home(request):
 
 def addBand(request):
 	if request.method == "POST":
-		showform = forms.ShowTrackerForm(request.POST)
-		
-		if showform.is_valid():
+
+		#showform = forms.ShowTrackerForm(request.POST)
+		#setlistform = forms.SetlistForm(request.POST)
+		#song = forms.SongForm(request.POST)
+		#band = forms.BandForm(request.POST)
+		#bandmembers = forms.BandMembersForm(request.POST)		
+		Band =forms.Band(request.POST)
+
+				
+		if Band.is_valid():
 			showform.save()
 	        	return HttpResponseRedirect("/success")		
 	else:
-		showform = forms.ShowTrackerForm()		
-		return render(request,"manager/addband.html" ,{"form" : showform})
+		band = forms.Band()		
+		return render(request,"manager/addband.html" ,{"form" : Band})
 
 
 def success(request):
