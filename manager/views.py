@@ -54,3 +54,15 @@ def addBand(request):
 
 def success(request):
 	return render(request,"manager/success.html")
+
+
+
+
+
+
+
+
+
+
+
+

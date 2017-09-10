@@ -23,6 +23,7 @@ Manager- Name of show
 		Time -------------------
 		Band Member ------ Instrument ----- ....Add a member triggers another bar
 		Setlist Name of Song ----------- Add a song triggers another bar
-		
+		issue clicking submit after each form completion-underlying need to be saved in database to connect
+			-we know what our keys are just not the values so we can link the keys together as foreignkeys so that 				each field is connected regardless
 Play together - online studio
 
