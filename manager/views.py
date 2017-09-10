@@ -11,21 +11,45 @@ def home(request):
 
 def addBand(request):
 	if request.method == "POST":
+		#send info from post to forms
+		showform = forms.ShowTrackerForm(request.POST)
+		setlistform = forms.SetlistForm(request.POST)
+		songform = forms.SongForm(request.POST)
+		bandform = forms.BandForm(request.POST)
+		bandmembersform = forms.BandMembersForm(request.POST)		
 
-		#showform = forms.ShowTrackerForm(request.POST)
-		#setlistform = forms.SetlistForm(request.POST)
-		#song = forms.SongForm(request.POST)
-		#band = forms.BandForm(request.POST)
-		#bandmembers = forms.BandMembersForm(request.POST)		
-		Band =forms.Band(request.POST)
-
-				
-		if Band.is_valid():
+		#check each form for validity				
+		if showform.is_valid():
 			showform.save()
-	        	return HttpResponseRedirect("/success")		
-	else:
-		band = forms.Band()		
-		return render(request,"manager/addband.html" ,{"form" : Band})
+
+		if setlistform.is_valid():   			
+			setlistform.save()
+
+		if songform.is_valid():
+			songform.save()
+
+		if bandform.is_valid():
+			bandform.save()
+
+		if bandmembersform.is_valid():	
+			bandmembersform.save()
+			return HttpResponseRedirect("/success")		
+		
+		#return a bandform with content with incomplete fields
+		else:
+			return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"setlistform" : setlistform ,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
+
+	else:	
+		#make empty forms
+		showform = forms.ShowTrackerForm()		
+		setlistform = forms.SetlistForm()
+		songform = forms.SongForm()
+		bandform = forms.BandForm()
+		bandmembersform = forms.BandMembersForm()		
+		
+		#render those empty forms
+		return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"setlistform" : setlistform ,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
+
 
 
 def success(request):

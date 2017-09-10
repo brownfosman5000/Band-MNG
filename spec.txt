@@ -17,6 +17,7 @@ Manager- Name of show
 
 	
 	 form for filling out band info -- = bar for typing
+		gonna possibly need some formsets to bind multiple instances 	
 		Name of show ---------------------
 		Date ---------------------
 		Time -------------------
