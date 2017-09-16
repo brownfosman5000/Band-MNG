@@ -13,6 +13,7 @@ class ShowTracker(models.Model):
                 return self.venue or u''
 
 #For each show I want a setlist
+##Key to ShowTracker
 class Setlist(models.Model):
         show = models.ForeignKey(ShowTracker)
 	nameofsetlist = models.CharField(max_length=50,null=True)
@@ -30,6 +31,7 @@ class Song(models.Model):
 		
 
 #For each show I want a group of bandmemebers
+##Key to ShowTracker
 class Band(models.Model):
 	show = models.ForeignKey(ShowTracker)
 	nameofband = models.CharField(max_length=50,null=True)	

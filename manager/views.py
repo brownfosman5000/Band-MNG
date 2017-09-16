@@ -37,7 +37,7 @@ def addBand(request):
 		
 		#return a bandform with content with incomplete fields
 		else:
-			return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"setlistform" : setlistform ,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
+			return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
 
 	else:	
 		#make empty forms
@@ -48,7 +48,7 @@ def addBand(request):
 		bandmembersform = forms.BandMembersForm()		
 		
 		#render those empty forms
-		return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"setlistform" : setlistform ,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
+		return render(request,"manager/addband.html" ,{"showform" : showform,"setlistform" : setlistform,"songform" : songform,"bandform" : bandform,"bandmembersform" : bandmembersform})
 
 
 
@@ -57,7 +57,8 @@ def success(request):
 
 
 
-
+def deleteBand(request):
+	return render(request,"manager/deleteband.html")
 
 
 
