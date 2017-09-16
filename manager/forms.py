@@ -10,22 +10,22 @@ class ShowTrackerForm(forms.ModelForm):
 class SetlistForm(forms.ModelForm):
 	class Meta:
 		model = models.Setlist	
-		
+		exclude = ("show",)		
 	
 
 class SongForm(forms.ModelForm):
 	class Meta:
 		model = models.Song
-		fields = ('song',)
+		exclude = ("setlist",)
 
 class BandForm(forms.ModelForm):
 	class Meta:
 		model = models.Band
-		fields = ('nameofband',)
+		exclude = ("show",)
 
 class BandMembersForm(forms.ModelForm):
 	class Meta:
 		model = models.BandMembers
-		fields = ('nameofbandmember',)
+		exclude = ("band",)
 
 	

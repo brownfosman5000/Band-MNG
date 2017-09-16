@@ -1,0 +1,48 @@
+<p>Please fill out all information </p>
+
+<form action="{% url 'addband' %}" method='post'>
+	{% csrf_token %}
+
+	{{showform.as_p}}
+	<button name="submit">Submit</button>
+		
+	
+</form>
+<form action="{% url 'addband' %}" method='post'>
+	{% csrf_token %}
+
+	{{setlistform.as_p}}
+	
+	<button name="submit">Submit</button>
+	
+</form>
+
+<form action="{% url 'addband' %}" method='post'>
+	{% csrf_token %}
+
+	{{songform.as_p}}
+	
+	<button name="submit">Submit</button>
+	
+</form>
+
+<form action="{% url 'addband' %}" method='post'>
+	{% csrf_token %}
+
+	{{bandform.as_p}}
+	
+	<button name="submit">Submit</button>
+	
+</form>
+
+
+<form action="{% url 'addband' %}" method='post'>
+	{% csrf_token %}
+
+	{{bandmembersform.as_p}}
+	
+	<button name="submit">Submit</button>
+	
+</form>
+
+
