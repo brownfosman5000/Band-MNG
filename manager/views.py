@@ -19,15 +19,32 @@ def addBand(request):
 		bandmembersform = forms.BandMembersForm(request.POST)		
 
 		#check each form for validity				
-		if showform.is_valid() and setlistform.is_valid():
-			print "valid"
+		if showform.is_valid() and setlistform.is_valid() and songform.is_valid() and bandform.is_valid() and bandmembersform.is_valid():
+			#save the shows info		
+			show = showform.save()
 			
-			showsave = showform.save()
-			setlistsave = setlistform.save(commit=False)
-			#bandsave = bandform.save(commit=False)
-			setlistsave.showsave = showsave
-			setlistsave.save()
+			#need to process the null fields
+			setlist = setlistform.save(commit=False)
+			band = bandform.save(commit=False)
 			
+			song = songform.save(commit=False)
+			bandmembers = bandmembersform.save(commit=False)
+				
+			#connect them together	
+			setlist.show = show
+			setlist.save()
+			
+			song.setlist = setlist
+
+
+			band.show = show
+			band.save()
+		
+			bandmembers.band = band
+
+			song.save()
+			bandmembers.save()
+
 			return render(request,"manager/success.html")
 
 

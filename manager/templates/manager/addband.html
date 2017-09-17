@@ -2,9 +2,12 @@
 
 <form action="{% url 'addband' %}" method='post'>
 	{% csrf_token %}
-
+	
 	{{showform.as_p}}
 	{{setlistform.as_p}}
+	{{songform.as_p}}
+	{{bandform.as_p}}
+	{{bandmembersform.as_p}}
 	<button name="submit">Submit</button>
 		
 	
