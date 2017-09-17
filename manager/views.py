@@ -88,7 +88,8 @@ def success(request):
 def deleteBand(request):
 	return render(request,"manager/deleteband.html")
 
-
+def displayBand(request):
+	return render(request,"manager/displayband.html")
 
 
 
