@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 import forms
+import models
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -88,8 +89,11 @@ def success(request):
 def deleteBand(request):
 	return render(request,"manager/deleteband.html")
 
-def displayBand(request):
-	return render(request,"manager/displayband.html")
+def displayBand(request,showtracker_id):
+	showtracker = models.ShowTracker.objects.get(id=showtracker_id)
+	
+	context = {'showtracker' : showtracker}
+	return render(request,"manager/displayband.html",context)
 
 
 

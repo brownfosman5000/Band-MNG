@@ -6,6 +6,6 @@ urlpatterns = [
 	url(r'^addband/$',views.addBand,name="addband"),
 	url(r'^success$',views.success,name="success"),
 	url(r'^deleteband$',views.deleteBand,name="deleteband"),
-	url(r'^displayband$',views.displayBand,name="displayband") 
+	url(r'^displayband/(?P<showtracker_id>\d+)/$',views.displayBand,name="displayband") 
 ] 
 
