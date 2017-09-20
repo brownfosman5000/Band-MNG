@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def home(request):
+	
 	return render(request,"manager/home.html")
 
 def addBand(request):
@@ -92,7 +93,17 @@ def deleteBand(request):
 def displayBand(request,showtracker_id):
 	showtracker = models.ShowTracker.objects.get(id=showtracker_id)
 	
-	context = {'showtracker' : showtracker}
+	#only problem with this is that it is not sustainable unless we delete all top object all together
+	setlist = models.Setlist.objects.get(id=showtracker_id)
+	song = models.Song.objects.get(id=showtracker_id)
+	band = models.Band.objects.get(id=showtracker_id)
+	bandmembers = models.BandMembers.objects.get(id=showtracker_id)	
+	context = {'showtracker' : showtracker, 
+	           'setlist': setlist,
+		   'song' : song,
+		   'band': band, 
+		   'bandmembers' : bandmembers,		
+	          }
 	return render(request,"manager/displayband.html",context)
 
 
