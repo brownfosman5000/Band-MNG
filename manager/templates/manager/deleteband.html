@@ -1,5 +1,6 @@
 <p> Delete Band </p>
 
-{% for band in models. %}
-	<p> {{band}} </p>
+{% for band in bands %}
+	<a href={% url bandname band.nameofband%}>band.nameofband</a>
+
 {% endfor %}

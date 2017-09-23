@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 
 #Keeps track of dates times and names of shows
@@ -27,7 +28,7 @@ class Song(models.Model):
         song = models.CharField(max_length=50,null=True)
 	
 	def __unicode__(self):
-		return self.song
+		return self.song 
 		
 
 #For each show I want a group of bandmemebers
@@ -37,7 +38,7 @@ class Band(models.Model):
 	nameofband = models.CharField(max_length=50,null=True)	
 	
 	def __unicode__(self):	
-		return self.nameofband
+		return self.nameofband or u''
 	
 class BandMembers(models.Model):
 	band = models.ForeignKey(Band)
@@ -45,7 +46,7 @@ class BandMembers(models.Model):
 	instrument = models.CharField(max_length=50,null=True)	
 	
 	def __unicode__(self):
-		return self.nameofbandmember
+		return self.nameofbandmember or u''
 	
 #class CashOrCheck(models.Model):
 	#bandmember = models.ForeignKey(BandMembers)

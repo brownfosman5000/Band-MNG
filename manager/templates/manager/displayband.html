@@ -1,7 +1,5 @@
-<p>Currently Displaying all of your Band's Information </p>
+<p>Currently Displaying all of your Bands </p>
 
-<p>{{showtracker.venue}}</p>
-<p>{{setlist.nameofsetlist}}</p>
-<p>{{song.song}}</p>
-<p>{{band.nameofband}}</p>
-<p>{{bandmembers.nameofbandmember}}</p>
+{% for band in bands %}
+	<p>{{band.nameofband}}</p>
+{% endfor %}

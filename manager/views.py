@@ -16,12 +16,12 @@ def addBand(request):
 		#send info from post to forms
 		showform = forms.ShowTrackerForm(request.POST)
 		setlistform = forms.SetlistForm(request.POST)
-		songform = forms.SongForm(request.POST)
+		songformset = forms.SongForm.SongFormSet(request.POST)
 		bandform = forms.BandForm(request.POST)
-		bandmembersform = forms.BandMembersForm(request.POST)		
+		bandmembersformset = forms.BandMembersForm.BandMembersFormSet(request.POST)		
 
 		#check each form for validity				
-		if showform.is_valid() and setlistform.is_valid() and songform.is_valid() and bandform.is_valid() and bandmembersform.is_valid():
+		if showform.is_valid() and setlistform.is_valid() and songformset.is_valid() and bandform.is_valid() and bandmembersformset.is_valid():
 			#save the shows info		
 			show = showform.save()
 			
@@ -29,23 +29,26 @@ def addBand(request):
 			setlist = setlistform.save(commit=False)
 			band = bandform.save(commit=False)
 			
-			song = songform.save(commit=False)
-			bandmembers = bandmembersform.save(commit=False)
+			songs = songformset.save(commit=False)
+			bandmembers = bandmembersformset.save(commit=False)
 				
 			#connect them together	
 			setlist.show = show
 			setlist.save()
-			
-			song.setlist = setlist
+				
 
 
 			band.show = show
 			band.save()
-		
-			bandmembers.band = band
+			for bandmember in bandmembers:
+				bandmember.band = band
+				bandmember.save()
 
-			song.save()
-			bandmembers.save()
+			for song in songs:	
+				song.setlist = setlist
+				song.save()
+	
+
 
 			return render(request,"manager/success.html")
 
@@ -58,9 +61,9 @@ def addBand(request):
 			return render(request,"manager/addband.html",
 				{"showform" : showform,
 				"setlistform" : setlistform,	
-				"songform" : songform,
+				"songformset" : songformset,
 				"bandform" : bandform,
-				"bandmembersform" : bandmembersform}
+				"bandmembersformset" : bandmembersformset}
 			)
 
 
@@ -68,17 +71,17 @@ def addBand(request):
 		#make empty forms
 		showform = forms.ShowTrackerForm()		
 		setlistform = forms.SetlistForm()
-		songform = forms.SongForm()
+		songformset = forms.SongForm.SongFormSet()
 		bandform = forms.BandForm()
-		bandmembersform = forms.BandMembersForm()		
+		bandmembersformset = forms.BandMembersForm.BandMembersFormSet()		
 		
 		#render those empty forms
 		return render(request,"manager/addband.html",
 				{"showform" : showform,
 				"setlistform" : setlistform,	
-				"songform" : songform,
+				"songformset" : songformset,
 				"bandform" : bandform,
-				"bandmembersform" : bandmembersform}
+				"bandmembersformset" : bandmembersformset}
 			)
 
 
@@ -88,22 +91,14 @@ def success(request):
 
 
 def deleteBand(request):
-	return render(request,"manager/deleteband.html")
+	bands = models.Band.objects.all()
+	context = {'bands': bands}
+	return render(request,"manager/deleteband.html",context)
 
-def displayBand(request,showtracker_id):
-	showtracker = models.ShowTracker.objects.get(id=showtracker_id)
+def displayBand(request):
 	
-	#only problem with this is that it is not sustainable unless we delete all top object all together
-	setlist = models.Setlist.objects.get(id=showtracker_id)
-	song = models.Song.objects.get(id=showtracker_id)
-	band = models.Band.objects.get(id=showtracker_id)
-	bandmembers = models.BandMembers.objects.get(id=showtracker_id)	
-	context = {'showtracker' : showtracker, 
-	           'setlist': setlist,
-		   'song' : song,
-		   'band': band, 
-		   'bandmembers' : bandmembers,		
-	          }
+	bands = models.Band.objects.all();
+	context = {'bands': bands}
 	return render(request,"manager/displayband.html",context)
 
 
