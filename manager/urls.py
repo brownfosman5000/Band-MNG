@@ -8,5 +8,6 @@ urlpatterns = [
 	url(r'^deleteband$',views.deleteBand,name="deleteband"),
 	url(r'^displayband/$',views.displayBand,name="displayband"),
 	url(r'^deletesuccessful/$',views.deletesuccessful,name="deletesuccessful"),
+	url(r'^addshow/$',views.addshow,name="addshow"),
 ] 
 

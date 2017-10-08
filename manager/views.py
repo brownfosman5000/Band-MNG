@@ -16,46 +16,34 @@ def home(request):
 def addBand(request):
 	if request.method == "POST":
 		#send info from post to forms
-		showform = forms.ShowTrackerForm(request.POST)
+
 		bandform = forms.BandForm(request.POST)
 
 		#check each form for validity				
-		if showform.is_valid() and bandform.is_valid():	
-			show = showform.save()
-			band = bandform.save(commit=False)
-			band.show = show
-			band.save()
-
-
+		if bandform.is_valid():	
+			bandform.save()
 			return render(request,"manager/success.html")
-
-
-
-
-
-		#return a bandform with content with incomplete fields
 		else:
-			return render(request,"manager/addband.html",
-				{
-				"showform" : showform,
-				"bandform" : bandform,
-				}
-			)
-
-
+			return render(request,"manager/addband.html",{"bandform" : bandform})
 	else:	
-		#make empty forms
-		showform = forms.ShowTrackerForm()		
+		#make empty forms	
 		bandform = forms.BandForm()
-		
-		
 		#render those empty forms
-		return render(request,"manager/addband.html",
-				{
-				"showform" : showform,
-				"bandform" : bandform,
-				}
-			)
+		return render(request,"manager/addband.html",{"bandform" : bandform})
+
+	
+def addshow(request):
+	if request.method == "POST":
+			showform = forms.ShowTrackerForm(request.POST)
+			if showform.is_valid():
+				showform.save()
+				return render(request, "manager/success.html")
+			else:
+				return render(request, "manager/addshow.html",{"showform":showform})
+
+	else:
+		showform = forms.ShowTrackerForm()
+		return render(request, "manager/addshow.html",{"showform":showform})
 
 
 def success(request):
@@ -70,12 +58,14 @@ def deleteBand(request):
 
 def displayBand(request):
 	
-	bands = models.Band.objects.all();
-	context = {'bands': bands}
+	shows = models.ShowTracker.objects.all();
+
+	context = {'shows':shows}
 	return render(request,"manager/displayband.html",context)
 
 def deletesuccessful(request):
 	return render(request,"manager/deletesuccessful.html")
+
 
 
 

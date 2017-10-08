@@ -1,0 +1,7 @@
+we have user create a band 
+
+just name for now
+
+then we assign shows to that band with dates and times
+
+eventually want to delete shows from that band

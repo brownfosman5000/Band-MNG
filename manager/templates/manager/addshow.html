@@ -1,18 +1,18 @@
 <!DOCTYPE HTML>
+<p> Add Show </p>
+
 <head>
 	{% load static %}
 
 	<link rel="stylesheet" type="text/css" href="{% static "manager/css/addband.css"%}">
 
 </head>
-
 <p>Please fill out all information </p>
-
 <body>
-	<form action="{% url 'addband' %}" method='post'>
+	<form action="{% url 'addshow' %}" method='post'>
 		{% csrf_token %}
-
-		{{bandform.as_p}}
+		
+		{{showform.as_p}}
 
 		<button type="submit" value="submit">submit</button>
 
@@ -20,4 +20,3 @@
 </body>
 
 
-		
