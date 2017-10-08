@@ -1,5 +1,6 @@
 <p>Currently Displaying all of your Bands </p>
 
 {% for band in bands %}
-	<p>{{band.nameofband}}</p>
+
+		<p>{{band.nameofband}} on {{band.show.datetime}} at the {{band.show.venue }} </p> 
 {% endfor %}

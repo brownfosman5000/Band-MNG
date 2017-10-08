@@ -16,7 +16,7 @@ class SongForm(forms.ModelForm):
 		model = Song
 		exclude = ("setlist",)
 	# Max num of songs is 2 subject to change to variable
-	SongFormSet = forms.modelformset_factory(Song,fields=('song',),max_num=1,extra=10)
+	#SongFormSet = forms.modelformset_factory(Song,fields=('song',),extra=4)
 
 
 class BandForm(forms.ModelForm):
@@ -30,5 +30,5 @@ class BandMembersForm(forms.ModelForm):
 		exclude = ("band",)
 	
 	# Max num of songs is 2 subject to change to variable
-	BandMembersFormSet = forms.modelformset_factory(BandMembers,fields=('nameofbandmember','instrument',),max_num=2,extra=10)
+	#BandMembersFormSet = forms.modelformset_factory(BandMembers,fields=('nameofbandmember','instrument',),max_num=2,extra=10)
 

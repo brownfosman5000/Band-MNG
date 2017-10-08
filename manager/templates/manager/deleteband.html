@@ -1,6 +1,8 @@
 <p> Delete Band </p>
 
 {% for band in bands %}
-	<a href={% url bandname band.nameofband%}>band.nameofband</a>
+	<ul>
+		<li><a href="{% url 'deletesuccessful' %}">{{band.nameofband}}</a></li>
+	</ul>
 
 {% endfor %}

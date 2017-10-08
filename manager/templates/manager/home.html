@@ -1,9 +1,30 @@
 <!doctype html>
+<head>
 
-<p> Welcome to the Band Manager Website</p>
+	<title>Band Manager</title>
 
-<a href={% url "addband" %}>Add Band</a>
-<a href={% url "deleteband" %}>Delete Band</a>
-<a href=displayband> Display Band </a>
+	{% load static %}
 
+	<link rel="stylesheet" type="text/css" href="{% static "manager/css/home.css"%}"
+	
+
+</head>
+
+<h1> Welcome to the Band Manager Website</h1>
+<body>
+	<div class="nav">
+		<ul>
+			<li><a href={% url "addband" %}>Add Band</a></li>
+			<li><a href={% url "deleteband" %}>Delete Band</a></li>
+			<li><a href={% url "displayband" %}> Display Band </a></li>
+		</ul>
+	</div>
+
+	<img src= "{% static "manager/images/homepic.jpg"%}" alt="My image"/>
+
+</body>
+<footer>
+  <p>Foster Brown Incoporation</p>
+  <p>Contact information: fosterbrown1998@gmail.com </p>
+</footer>
 
