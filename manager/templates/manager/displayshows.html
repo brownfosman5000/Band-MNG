@@ -1,0 +1,13 @@
+<p>Currently Displaying all of your Shows for {{band.nameofband}} </p>
+
+{% for show in shows %}
+	<ul> 
+		<li>
+			<a href={%url 'deleteshow' pk=show.pk%}>You have a show at {{show.venue}} at {{show.datetime}}
+
+		</li> 
+
+	</ul>
+
+{%endfor%}
+

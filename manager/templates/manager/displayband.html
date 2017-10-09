@@ -1,6 +1,7 @@
 <p>Currently Displaying all of your Bands </p>
 
-{% for show in shows %}
-
-		<p>{{show.band.nameofband}} on {{show.datetime}} at the {{show.venue }} </p> 
+{% for band in bands %}
+	<ul>
+		<li> <a href={% url 'displayshows' pk=band.pk %}>{{band.nameofband}}</a> </li>
+	</ul>
 {% endfor %}

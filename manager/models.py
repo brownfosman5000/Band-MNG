@@ -13,12 +13,15 @@ class Band(models.Model):
 
 
 class ShowTracker(models.Model):
-		band = models.ForeignKey(Band)
-    		datetime = models.DateTimeField()
-        	venue = models.CharField(max_length=50,null=True)
+	class Meta:
+		ordering = ["datetime"]
 
-        	def __unicode__(self):
-                	return self.venue or u''
+	band = models.ForeignKey(Band)
+	datetime = models.DateTimeField()
+	venue = models.CharField(max_length=50,null=True)
+
+	def __unicode__(self):
+		return self.venue or u''
 
 #For each show I want a setlist
 ##Key to ShowTracker

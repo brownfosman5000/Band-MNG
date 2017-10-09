@@ -5,3 +5,14 @@ just name for now
 then we assign shows to that band with dates and times
 
 eventually want to delete shows from that band
+	-so need a page from the links of the bands to dipslay all shows
+	Ex.
+		Band 1 - links to a bunch of shows for this particular band
+		Band 2 - links to a bunch of shows for this particular band
+			- Can we get our band to retrieve the shows??
+					So they connect between primary and foreign key
+
+					Links could connect via primary key
+
+						-On this page delete button next to show 
+						when clicked it says show deleted successfully

@@ -13,6 +13,7 @@ def home(request):
 	
 	return render(request,"manager/home.html")
 
+#Adds a new band object
 def addBand(request):
 	if request.method == "POST":
 		#send info from post to forms
@@ -31,7 +32,7 @@ def addBand(request):
 		#render those empty forms
 		return render(request,"manager/addband.html",{"bandform" : bandform})
 
-	
+#Adds a new show object that connects to a band object
 def addshow(request):
 	if request.method == "POST":
 			showform = forms.ShowTrackerForm(request.POST)
@@ -46,22 +47,41 @@ def addshow(request):
 		return render(request, "manager/addshow.html",{"showform":showform})
 
 
+
+
 def success(request):
 	return render(request,"manager/success.html")
 
 
 
-def deleteBand(request):
+
+def displayband(request):
 	bands = models.Band.objects.all()
 	context = {'bands': bands}
-	return render(request,"manager/deleteband.html",context)
-
-def displayBand(request):
-	
-	shows = models.ShowTracker.objects.all();
-
-	context = {'shows':shows}
 	return render(request,"manager/displayband.html",context)
+
+
+
+def displayshows(request,pk):
+	shows = models.ShowTracker.objects.filter(band_id=pk)
+	band = models.Band.objects.get(id=pk)
+	context = {'shows': shows,'band' : band}
+	return render(request,"manager/displayshows.html",context)
+
+def deleteshow(request,pk):
+	show = models.ShowTracker.objects.get(id=pk)
+	show.delete()
+	return render(request,"manager/deleteshow.html")
+
+
+def calandar(request):
+	shows = models.ShowTracker.objects.all();
+	context = {'shows':shows}
+	return render(request,"manager/calandar.html",context)
+
+
+
+
 
 def deletesuccessful(request):
 	return render(request,"manager/deletesuccessful.html")

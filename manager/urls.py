@@ -5,9 +5,10 @@ urlpatterns = [
 	url(r'^$',views.home,name="home"),
 	url(r'^addband/$',views.addBand,name="addband"),
 	url(r'^success$',views.success,name="success"),
-	url(r'^deleteband$',views.deleteBand,name="deleteband"),
-	url(r'^displayband/$',views.displayBand,name="displayband"),
-	url(r'^deletesuccessful/$',views.deletesuccessful,name="deletesuccessful"),
+	url(r'^displayband/$',views.displayband,name="displayband"),
+	url(r'^displayshows/(?P<pk>\d+)$',views.displayshows,name="displayshows"),	
+	url(r'^calendar',views.calandar,name="calendar"),
+	url(r'^deleteshow/(?P<pk>\d+)$',views.deleteshow,name="deleteshow"),
 	url(r'^addshow/$',views.addshow,name="addshow"),
 ] 
 
