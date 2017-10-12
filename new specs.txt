@@ -10,9 +10,12 @@ eventually want to delete shows from that band
 		Band 1 - links to a bunch of shows for this particular band
 		Band 2 - links to a bunch of shows for this particular band
 			- Can we get our band to retrieve the shows??
-					So they connect between primary and foreign key
+				So they connect between primary and foreign key
+				-On this page delete button next to show 
+				when clicked it says show deleted successfully
 
-					Links could connect via primary key
-
-						-On this page delete button next to show 
-						when clicked it says show deleted successfully
+we also want to edit
+	-make a page that displays all links to bands to display all shows
+		-already have
+	have buttons next to each link in band and show-delete and edit
+	delete button links to delete successful page and when we return the band should be deleted 

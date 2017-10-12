@@ -2,6 +2,18 @@
 
 {% for band in bands %}
 	<ul>
-		<li> <a href={% url 'displayshows' pk=band.pk %}>{{band.nameofband}}</a> </li>
+		<li> 
+			<form action={% url 'displayband' %} method="post">	
+				{% csrf_token %}
+				<a href={% url 'displayshows' pk=band.pk %}>{{band.nameofband}}</a>
+				<button name="DeleteButton" value="{{ band.id }}">
+    					Delete
+				</button>
+
+https://stackoverflow.com/questions/5160306/how-to-add-a-delete-button-to-django-forms-generated-form
+
+
+			</form>
+		</li>
 	</ul>
 {% endfor %}
