@@ -1,4 +1,15 @@
-{% load managertags %}
+
+<head>
+	{% load managertags %}
+
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+
+</head>
+
+
+
 <p>Currently Displaying all of your Shows for {{band.nameofband}} </p>
 
 {% for show in shows %}
@@ -12,27 +23,20 @@
 					Delete 
 				</button>
 			</form>
+			
 
+			<form action={% url 'editshow' pk=show.pk %} method="post">
+				{%csrf_token %}
 
-
-
-
-
-			<form action={%url 'editshow' pk=show.pk %} method="post">
-				{%csrf_token%}
-
-				<button name={{show.pk}} value="{{band.pk}}" >
-						Edit {{show.pk}} {{showid}}
+				<button name={{show.pk}} value="{{ band.pk }}">
+					Edit 
 				</button>
 
-				{% if show.pk|to_int == showid|to_int %}
+				{%if show.pk|to_int == showid|to_int%}
 					{{showform.as_p}}
 					<input type="Submit" value="Submit">
-				{% endif %}
-					
-
+				{%endif%}
 			</form>
-				
 
 		</li> 
 

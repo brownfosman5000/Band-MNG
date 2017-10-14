@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-import pdb
+from django.shortcuts import render,redirect,reverse
+#import pdb
 
 import forms
 import models
 from django.http import HttpResponseRedirect
 # Create your views here.
-def index(request):
-	return render(request,"manager/index.html")
-
 def home(request):
 	
 	return render(request,"manager/home.html")
@@ -86,35 +83,46 @@ def deleteshow(request,pk):
 	bandid = request.POST.get(pk)
 	shows = models.ShowTracker.objects.filter(band_id=bandid)
 	band = models.Band.objects.get(id=bandid)
-
-	print "DELTETED"
+	print "Deleted"
 	#show.delete()
 
-	return render(request,"manager/displayshows.html",{"shows":shows,"band":band})
-
+	#return render(request,"manager/displayshows.html",{"shows":shows,"band":band})
+	return redirect("displayshows", pk=bandid)
 
 
 #Called as a part of the displayshow template if edit button was clicked
 def editshow(request,pk):
 	show = models.ShowTracker.objects.get(pk=pk)
+	'''
+	Since this function is called again for post info 
+	bandid will not be available the second time
+	So we must check and get our value from the request dic
+	we were given 
+	'''
 	bandid = request.POST.get(pk)
+	if not bandid:
+		bandid = request.POST.get("band")
 
 
-	shows = models.ShowTracker.objects.filter(band_id=bandid)
-	band = models.Band.objects.get(id=bandid)
-	showform = forms.ShowTrackerForm(request.POST)
+	if request.method == "POST":
+		#get shows related to band
+		shows = models.ShowTracker.objects.filter(band_id=bandid)
+		#get band that we are investigating
+		band = models.Band.objects.get(id=bandid)
+		showform = forms.ShowTrackerForm(request.POST, instance=show)	
+		context = {"shows":shows,"band":band, "showform":showform, "showid":pk}
 
+		if showform.is_valid():
+			print "was valid"
+			showform.save()
+			return redirect("displayshows" ,pk=bandid)
+		else:
+			print "here"
+			return render(request,"manager/displayshows.html",context)
 
-	context = {"shows":shows,"band":band, "showform":showform,"showid" : pk}
-
-	if showform.is_valid():
-		print "was valid"
-		showform.save()
+	else:
+		print "no here"
 		return render(request,"manager/displayshows.html",context)
-	
-	return render(request,"manager/displayshows.html",context)
-
-
 
 
 
