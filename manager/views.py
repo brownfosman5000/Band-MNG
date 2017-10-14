@@ -71,7 +71,7 @@ def displayshows(request,pk):
 	#Take the pk of the band selected and set it equal to our id
 	band = models.Band.objects.get(id=pk)
 
-	context = {'shows': shows,'band' : band}
+	context = {'shows': shows,'band' : band,'bandid' : pk}
 
 	return render(request,"manager/displayshows.html",context)
 
@@ -82,14 +82,42 @@ def deleteshow(request,pk):
 
 	#Must use this button because we have to get info related to that specific band
 	#Best way to do it as of right now
-	bandid = request.POST.get("DeleteButton")
+	print request.POST
+	bandid = request.POST.get(pk)
 	shows = models.ShowTracker.objects.filter(band_id=bandid)
 	band = models.Band.objects.get(id=bandid)
 
-	print request.POST
+	print "DELTETED"
 	#show.delete()
 
 	return render(request,"manager/displayshows.html",{"shows":shows,"band":band})
+
+
+
+#Called as a part of the displayshow template if edit button was clicked
+def editshow(request,pk):
+	show = models.ShowTracker.objects.get(pk=pk)
+	bandid = request.POST.get(pk)
+
+
+	shows = models.ShowTracker.objects.filter(band_id=bandid)
+	band = models.Band.objects.get(id=bandid)
+	showform = forms.ShowTrackerForm(request.POST)
+
+
+	context = {"shows":shows,"band":band, "showform":showform,"showid" : pk}
+
+	if showform.is_valid():
+		print "was valid"
+		showform.save()
+		return render(request,"manager/displayshows.html",context)
+	
+	return render(request,"manager/displayshows.html",context)
+
+
+
+
+
 
 
 #Called as a part of the displayband template if delete button was clicked
@@ -123,25 +151,6 @@ def editband(request,pk):
 	else:
 		print "wasn't valid"
 		return render(request,"manager/displayband.html",contextwithform)
-
-
-
-#Called as a part of the displayshow template if edit button was clicked
-def editshow(request,pk):
-	#show = models.ShowTracker.objects.get(pk=pk)
-	#bandid = request.POST.get("EditButton")
-	#Must use this button because we have to get info related to that specific band
-	#Best way to do it as of right now
-	#print bandid + pk
-	#shows = models.ShowTracker.objects.filter(band_id=bandid)
-	#band = models.Band.objects.get(id=bandid)
-	#print shows
-	showform = forms.ShowTrackerForm(request.POST)
-	print showform
-
-	context = {"showform":showform}
-
-	return render(request,"manager/displayshows.html",{"showform" : showform})
 
 
 

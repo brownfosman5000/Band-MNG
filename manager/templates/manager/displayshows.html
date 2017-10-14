@@ -8,7 +8,7 @@
 			<form action={% url 'deleteshow' pk=show.pk %} method="post">
 				{%csrf_token %}
 
-				<button name="DeleteButton" value="{{ band.pk }}">
+				<button name={{show.pk}} value="{{ band.pk }}">
 					Delete 
 				</button>
 			</form>
@@ -21,16 +21,18 @@
 			<form action={%url 'editshow' pk=show.pk %} method="post">
 				{%csrf_token%}
 
-				<button name="EditButton" value="{{show.pk}}">
-						Edit
+				<button name={{show.pk}} value="{{band.pk}}" >
+						Edit {{show.pk}} {{showid}}
 				</button>
 
-
-				{{showform.as_p}}
+				{% if show.pk|to_int == showid|to_int %}
+					{{showform.as_p}}
+					<input type="Submit" value="Submit">
+				{% endif %}
 					
 
 			</form>
-
+				
 
 		</li> 
 
