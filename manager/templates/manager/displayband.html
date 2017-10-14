@@ -1,19 +1,30 @@
-<p>Currently Displaying all of your Bands </p>
+{% load managertags %}
+<p>Currently Displaying all of your Bands {{band.nameofband}} </p>
 
 {% for band in bands %}
 	<ul>
-		<li> 
-			<form action={% url 'displayband' %} method="post">	
+		<li>
+			<a href={% url 'displayshows' pk=band.pk %}>{{band.nameofband}}</a>
+			<form action={% url 'deleteband' pk=band.pk %} method="post">	
 				{% csrf_token %}
-				<a href={% url 'displayshows' pk=band.pk %}>{{band.nameofband}}</a>
-				<button name="DeleteButton" value="{{ band.id }}">
-    					Delete
+				
+				<button name="DeleteButton" value={{ band.pk }}>
+    					Delete 
+				</button>
+			</form>
+
+			<form action={% url 'editband' pk=band.pk %} method="post">	
+				{% csrf_token %}
+				<button name="EditButton" value={{band.pk}}>
+						Edit
 				</button>
 
-https://stackoverflow.com/questions/5160306/how-to-add-a-delete-button-to-django-forms-generated-form
-
-
+				{% if editid|to_int == band.pk|to_int %}
+					{{bandform.as_p}}
+					<input type="submit" value="submit">
+				{% endif %}
 			</form>
+				
 		</li>
 	</ul>
 {% endfor %}

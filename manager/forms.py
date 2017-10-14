@@ -11,7 +11,7 @@ class ShowTrackerForm(forms.ModelForm):
 	class Meta:
 		model = ShowTracker	
 		fields = "__all__"	
-	
+
 		
 # class SetlistForm(forms.ModelForm):
 # 	class Meta:
@@ -35,4 +35,3 @@ class ShowTrackerForm(forms.ModelForm):
 	
 	# Max num of songs is 2 subject to change to variable
 	#BandMembersFormSet = forms.modelformset_factory(BandMembers,fields=('nameofbandmember','instrument',),max_num=2,extra=10)
-

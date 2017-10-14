@@ -1,9 +1,36 @@
+{% load managertags %}
 <p>Currently Displaying all of your Shows for {{band.nameofband}} </p>
 
 {% for show in shows %}
 	<ul> 
 		<li>
-			<a href={%url 'deleteshow' pk=show.pk%}>You have a show at {{show.venue}} at {{show.datetime}}
+			You have a show at {{show.venue}} at {{show.datetime}}
+			<form action={% url 'deleteshow' pk=show.pk %} method="post">
+				{%csrf_token %}
+
+				<button name="DeleteButton" value="{{ band.pk }}">
+					Delete 
+				</button>
+			</form>
+
+
+
+
+
+
+			<form action={%url 'editshow' pk=show.pk %} method="post">
+				{%csrf_token%}
+
+				<button name="EditButton" value="{{show.pk}}">
+						Edit
+				</button>
+
+
+				{{showform.as_p}}
+					
+
+			</form>
+
 
 		</li> 
 
