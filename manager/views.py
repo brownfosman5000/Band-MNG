@@ -83,8 +83,7 @@ def deleteshow(request,pk):
 	bandid = request.POST.get(pk)
 	shows = models.ShowTracker.objects.filter(band_id=bandid)
 	band = models.Band.objects.get(id=bandid)
-	print "Deleted"
-	#show.delete()
+	show.delete()
 
 	#return render(request,"manager/displayshows.html",{"shows":shows,"band":band})
 	return redirect("displayshows", pk=bandid)
