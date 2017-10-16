@@ -1,11 +1,7 @@
-body > .container-fluid{
-	font-size: 16px;
-	font-style: italic;
-}
 body{
 	background-color: lightblue
 }
-
-body > img{
-	width: 100%;
+.container{
+	padding-top: 5rem;
+	text-align: center;
 }
