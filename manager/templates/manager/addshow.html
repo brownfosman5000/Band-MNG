@@ -1,23 +1,35 @@
 <!DOCTYPE HTML>
-<p> Add Show </p>
-
 <head>
 	{% load static %}
 
-	<link rel="stylesheet" type="text/css" href="{% static "manager/css/addband.css"%}">
+
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static "manager/css/addshow.css"%}">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<p>Please fill out all information </p>
+
+
 <body>
-	<form action="{% url 'addshow' %}" method='post'>
-		{% csrf_token %}
-		
-		{{showform.as_p}}
+	{% include "manager/navbar.html"%}
+	<div class="container">
+		<p>Please fill out all information </p>
+		<div class="show-info">
 
-		<button type="submit" value="submit">submit</button>
+			<form action="{% url 'addshow' %}" method='post'>
+				{% csrf_token %}
+				
+				{{showform.as_p}}
 
-	</form>
+				<button type="submit" value="submit">submit</button>
+			</form>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 
-
+	

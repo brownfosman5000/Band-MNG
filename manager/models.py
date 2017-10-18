@@ -23,6 +23,10 @@ class ShowTracker(models.Model):
 	def __unicode__(self):
 		return self.venue or u''
 
+class SignIn(models.Model):
+	username = models.CharField(max_length=50,null=True)
+	password = models.CharField(max_length=50,null=True)
+
 #For each show I want a setlist
 ##Key to ShowTracker
 # class Setlist(models.Model):
