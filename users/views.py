@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def homesigned(request):
-	return render(request,"registration/homesigned.html")
+	return render(request,"registration/home.html")
 def register(request):
 
 	if request.method != "POST":

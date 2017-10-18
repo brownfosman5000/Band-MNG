@@ -3,11 +3,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.auth.models import User
 # Create your models here.
 
 #Keeps track of dates times and names of shows
 class Band(models.Model):
-	nameofband = models.CharField(max_length=50,null=True)	
+	nameofband = models.CharField(max_length=50,null=True)
+	user = models.ForeignKey(User)
+
 	def __unicode__(self):	
 		return self.nameofband or u''
 
@@ -22,10 +25,6 @@ class ShowTracker(models.Model):
 
 	def __unicode__(self):
 		return self.venue or u''
-
-class SignIn(models.Model):
-	username = models.CharField(max_length=50,null=True)
-	password = models.CharField(max_length=50,null=True)
 
 #For each show I want a setlist
 ##Key to ShowTracker

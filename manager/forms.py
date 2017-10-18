@@ -1,5 +1,5 @@
 from django import forms
-from .models import ShowTracker,Band,SignIn
+from .models import ShowTracker,Band
 
 class BandForm(forms.ModelForm):
 	class Meta:
@@ -11,12 +11,6 @@ class ShowTrackerForm(forms.ModelForm):
 	class Meta:
 		model = ShowTracker	
 		fields = "__all__"	
-
-
-class SignIn(forms.ModelForm):
-	class Meta:
-		model = SignIn
-		fields = "__all__"
 
 		
 # class SetlistForm(forms.ModelForm):

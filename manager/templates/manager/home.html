@@ -16,19 +16,23 @@
 </head>
 
 <body>
-	{% include "manager/navbar.html" %}
+	
+  {% block nav %}
+	 {% include "manager/navbar.html" %}
+  {%endblock%}
 	<!-- <img src= "{% static "manager/images/homepic.jpg"%}" alt="My image"/> -->
 	<div class="container">
       <div class="home-info">
-        <h1>Welcome to Band Manager</h1>
+        <h1>{% block h1 %}Welcome to Band Manager{% endblock %}</h1>
         <p class="lead">Manage Bands in one Place<br>Spend more time jamming.<br> Slappin the Bass!!<br>Pluckin the Guitar!!<br>And most importantly...<br> Hittin those Drums!!</p>
       </div>
 
+      {% block content %}
       <div class="sign in">
       	<a class="btn btn-primary" href={% url "login" %} role="button">Sign In</a>
       	<a class="btn btn-primary" href={% url "register" %} role="button">Create an Account</a>
       </div>
-
+      {% endblock %}
     </div><!-- /.container -->
 
 

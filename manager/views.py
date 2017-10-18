@@ -9,9 +9,10 @@ import models
 from django.http import HttpResponseRedirect
 # Create your views here.
 def home(request):
-	
-	return render(request,"manager/home.html")
-
+	if not request.user.is_authenticated():
+		return render(request,"manager/home.html")
+	else:
+		return render(request,"registration/home.html")
 
 
 #Adds a new band object
