@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 #Keeps track of dates times and names of shows
 class Band(models.Model):
 	nameofband = models.CharField(max_length=50,null=True)
+	#Connect to a user
 	user = models.ForeignKey(User)
 
 	def __unicode__(self):	
@@ -19,6 +20,8 @@ class ShowTracker(models.Model):
 	class Meta:
 		ordering = ["datetime"]
 
+	#Connect to user
+	user = models.ForeignKey(User)
 	band = models.ForeignKey(Band)
 	datetime = models.DateTimeField()
 	venue = models.CharField(max_length=50,null=True)

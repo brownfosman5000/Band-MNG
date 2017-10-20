@@ -4,15 +4,37 @@ from .models import ShowTracker,Band
 class BandForm(forms.ModelForm):
 	class Meta:
 		model = Band
-		fields = "__all__"
+		exclude = ["user"]
 
 
 class ShowTrackerForm(forms.ModelForm):
 	class Meta:
 		model = ShowTracker	
-		fields = "__all__"	
+		exclude =["user"]	
 
-		
+	def __init__(self,*args,**kwargs):
+		print kwargs
+		#Get the user
+		self.user = kwargs.pop('user')
+		#Call base init
+		super(ShowTrackerForm,self).__init__(*args,**kwargs)
+		#filter for bands of a specific user
+		self.fields['band'].queryset = Band.objects.filter(user=self.user)
+		# print  Band.objects.filter(user=self.user)
+
+	def save(self, commit=True):
+		inst = super(ShowTrackerForm, self).save(commit=False)
+		inst.user = self.user
+		print self.user
+		if commit:
+			inst.save()
+			self.save_m2m()
+		return inst
+        #  = self._user
+        # if commit:
+        #     inst.save()
+        #     self.save_m2m()
+        # return inst
 # class SetlistForm(forms.ModelForm):
 # 	class Meta:
 # 		model = Setlist	

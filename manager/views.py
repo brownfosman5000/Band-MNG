@@ -21,12 +21,15 @@ def addBand(request):
 		print request.user
 		if request.method == "POST":
 			#send info from post to forms
-			bandform = forms.BandForm(request.POST)
+
+			#get particular user
+			bandinforeluser = models.Band(user=request.user)
+			bandform = forms.BandForm(request.POST,instance=bandinforeluser)
 
 			#check each form for validity				
 			if bandform.is_valid():	
 				bandform.save()
-				return render(request,"manager/home.html")
+				return render(request,"registration/home.html")
 			else:
 				return render(request,"manager/addband.html",{"bandform" : bandform})
 		else:	
@@ -39,16 +42,18 @@ def addBand(request):
 #Adds a new show object that connects to a band object
 def addshow(request):
 	if request.user.is_authenticated():
+		user = request.user
 		if request.method == "POST":
-				showform = forms.ShowTrackerForm(request.POST)
-				if showform.is_valid():
-					showform.save()
-					return render(request, "manager/home.html")
-				else:
-					return render(request, "manager/addshow.html",{"showform":showform})
+			#Set the fk using user 
+			showform = forms.ShowTrackerForm(request.POST,user=request.user)
+			if showform.is_valid():
+				showform.save()
+				return render(request, "registration/home.html")
+			else:
+				return render(request, "manager/addshow.html",{"showform":showform})
 
 		else:
-			showform = forms.ShowTrackerForm()
+			showform = forms.ShowTrackerForm(request.POST,user=request.user)
 			return render(request, "manager/addshow.html",{"showform":showform})
 	else:
 		return redirect("login")
@@ -63,7 +68,9 @@ def success(request):
 
 def displayband(request):
 	if request.user.is_authenticated():
-		bands = models.Band.objects.all()
+		print request.user
+		bands = models.Band.objects.filter(user=request.user)
+		print bands
 		context = {'bands': bands}
 		return render(request,"manager/displayband.html",context)
 	else:
@@ -71,16 +78,22 @@ def displayband(request):
 
 
 def displayshows(request,pk):
+	if request.user.is_authenticated():
+		#Based off of band we chose it has the val of pk and we set that band_id equal to that
+		#So we display the right shows associated with that particular band
+		print request.user
+		shows = models.ShowTracker.objects.filter(user = request.user,band_id=pk)
+		#Take the pk of the band selected and set it equal to our id
+		print shows
+		band = models.Band.objects.get(id=pk)
 
-	#Based off of band we chose it has the val of pk and we set that band_id equal to that
-	#So we display the right shows associated with that particular band
-	shows = models.ShowTracker.objects.filter(band_id=pk)
-	#Take the pk of the band selected and set it equal to our id
-	band = models.Band.objects.get(id=pk)
+		context = {'shows': shows,'band' : band,'bandid' : pk}
 
-	context = {'shows': shows,'band' : band,'bandid' : pk}
+		return render(request,"manager/displayshows.html",context)
 
-	return render(request,"manager/displayshows.html",context)
+	else:
+		return redirect("login")
+
 
 
 #Called as a part of the displayshow template if delete button was clicked
@@ -91,7 +104,7 @@ def deleteshow(request,pk):
 	#Best way to do it as of right now
 	print request.POST
 	bandid = request.POST.get(pk)
-	shows = models.ShowTracker.objects.filter(band_id=bandid)
+	shows = models.ShowTracker.objects.filter(user= request.user,band_id=bandid)
 	band = models.Band.objects.get(id=bandid)
 	show.delete()
 
@@ -139,7 +152,7 @@ def editshow(request,pk):
 
 #Called as a part of the displayband template if delete button was clicked
 def deleteband(request,pk):
-	bands = models.Band.objects.all()
+	bands = models.Band.objects.filter(user = request.user)
 	context = {'bands': bands}
 	deleteid = request.POST.get("DeleteButton")
 

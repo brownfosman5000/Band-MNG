@@ -24,7 +24,7 @@ def register(request):
 
 			new_user = authenticate(username=new_user.username,password=request.POST['password2'])
 			login(request,new_user)
-			return render(request,"manager/home.html")
+			return render(request,"registration/home.html")
 
 	context = {"registerform" : registerform}
 
