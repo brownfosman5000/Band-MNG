@@ -12,7 +12,9 @@ def home(request):
 	if not request.user.is_authenticated():
 		return render(request,"manager/home.html")
 	else:
-		return render(request,"registration/home.html")
+		user = request.user
+		context = {"user":user}
+		return render(request,"registration/home.html",context)
 
 
 #Adds a new band object
@@ -128,10 +130,10 @@ def editshow(request,pk):
 
 	if request.method == "POST":
 		#get shows related to band
-		shows = models.ShowTracker.objects.filter(band_id=bandid)
+		shows = models.ShowTracker.objects.filter(user=request.user,band_id=bandid)
 		#get band that we are investigating
 		band = models.Band.objects.get(id=bandid)
-		showform = forms.ShowTrackerForm(request.POST, instance=show)	
+		showform = forms.ShowTrackerForm(request.POST, user=request.user, instance=show)	
 		context = {"shows":shows,"band":band, "showform":showform, "showid":pk}
 
 		if showform.is_valid():
@@ -165,7 +167,7 @@ def deleteband(request,pk):
 
 #Called as a part of the displayband template if edit button was clicked
 def editband(request,pk):
-	bands = models.Band.objects.all()
+	bands = models.Band.objects.filter(user=request.user)
 	editid = request.POST.get("EditButton")
 	bandedit = models.Band.objects.get(pk=pk)
 	data = {"bandname" : models.Band.objects.get(id=pk).nameofband}
